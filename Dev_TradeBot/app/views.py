@@ -3,7 +3,7 @@ from .serializer import Master, MasterSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import status
-from logic.get_latest_proxy import Proxy
+# from Dev_TradeBot.logic.get_latest_proxy import Proxy
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -29,8 +29,20 @@ class MasterListView(viewsets.ModelViewSet):
             return self.get_serializer(serialize.data)
 
 
-    # def create(self, request, *args, **kwargs):
-    #     pass
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        if data['user_type'] == 0:
+            serializer = MasterSerializer(data=data)
+            print(serializer)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            return Response({"error": "Invalid user type"}, status=status.HTTP_400_BAD_REQUEST)
+
+
     #
     # def update(self, request, *args, **kwargs):
     #     pass
@@ -52,6 +64,8 @@ class MasterListView(viewsets.ModelViewSet):
     #     serializer_class = self.serializer_class(master)
     #     return Response(serializer_class.data)
 
+class ChildListCreateView(viewsets.ModelViewSet):
+    pass
 
 
 

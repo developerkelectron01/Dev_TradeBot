@@ -9,7 +9,9 @@ from rest_framework.routers import DefaultRouter
 urlpatterns = [
     path('master/',MasterListCreateView.as_view()),
     path('master/<pk>',MasterRetriveUpdateDistroyView.as_view()),
-    path('test', testview.as_view({'get': 'list', 'post': 'create_user'}))
+    path('test', testview.as_view({'get': 'list', 'post': 'create_user'})),
+    path('create_master', MasterListView.as_view({'post': 'create'})),
+    # path('create_child', )
 
 
 #     # path('detail/<int:pk>/', views.post_detail, name='post_detail'),

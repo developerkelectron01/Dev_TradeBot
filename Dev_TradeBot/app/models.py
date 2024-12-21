@@ -9,17 +9,20 @@ def create_referral_code():
             return ref_code
 
 class Master(models.Model):
-
+    user_type = models.CharField(max_length=5, choices={
+        ('0', 'Master'),
+        ('1', 'Child'),
+    })
     username = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    phn_number = models.CharField(max_length=11)
+    phone_number = models.CharField(max_length=11)
     password = models.CharField(max_length=255)
     referal_code = models.CharField(max_length=64,editable=False, default=create_referral_code)
-    broker = models.CharField(max_length=9, default='Angle', choices=[
-        ('Angle', 'Angle'),
-        ('Zerodha', 'Zerodha'),
-        ('AliceBlue', 'AliceBlue'),
-    ])
+    # broker = models.CharField(max_length=9, default='Angle', choices=[
+    #     ('Angle', 'Angle'),
+    #     ('Zerodha', 'Zerodha'),
+    #     ('AliceBlue', 'AliceBlue'),
+    # ])
     is_angle = models.BooleanField(default=False)
     angle_totp = models.CharField(max_length=255, null=True)
     angle_api_key = models.CharField(max_length=255, null=True)
@@ -37,6 +40,7 @@ class Master(models.Model):
 
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
@@ -44,4 +48,4 @@ class Master(models.Model):
 
     class Meta:
         db_table = 'master'
-        ordering = ['created']
+        ordering = ['-created']
