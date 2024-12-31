@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3*5=%@fv=_8rcxhzz*lj#v^r4vkc1ltah29mg0gr3ra^c^+xzc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.3', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'app'
+    # 'test_app'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
@@ -119,11 +120,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
-
-USE_TZ = True
+USE_L10N = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

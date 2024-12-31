@@ -1,13 +1,11 @@
 from  rest_framework import serializers
-from  .models import Master
+from  .models import UserType
 
-class MasterSerializer(serializers.ModelSerializer):
+class UserTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Master
-        fields =    '__all__'
-
-# class ChildSerializer(serializers.ModelSerializer):
-#     master = MasterSerializer()
-#     class Meta:
-#         model = Master
-#         fields = ['id', 'child_name', 'master']
+        model = UserType
+        fields = '__all__'
+        # exclude = ['created', 'updated']
+        extra_kwargs = {
+            'master_id': {'read_only': True}
+        }
